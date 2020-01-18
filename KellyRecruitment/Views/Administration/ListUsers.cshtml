@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "ListUsers";
+}
+
+<h3 class="mt-3">List of All Registered Users</h3>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary mt-3" style="width:auto" asp-controller="account" asp-action="register"> Add New User</a>
+
+    foreach (var user in Model)
+    {
+        <div class="card mt-3">
+            <div class="card-header">
+                User Id : @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.UserName</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="DeleteUser" asp-route-Id ="@user.Id" asp-controller="Administration" method="post">
+                    <a asp-controller="administration" asp-action="EditUser" asp-route-Id="@user.Id" class="btn btn-primary">Edit</a>
+
+                    <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                        <span>Are you sure you want to Delete?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@user.Id',false)">No</a>
+                    </span>
+
+                    <span id="deleteSpan_@user.Id">
+                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@user.Id',true)">Delete</a>
+                    </span>
+                  
+                    @*for browser Delete confrimation*@
+                            @*<button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to Delete user : @user.UserName??')">Delete</button>*@
+                </form>
+            </div>
+        </div>
+    }
+}
+
+else
+{
+    <div class="card">
+        <div class="card-header text-danger">
+            No User Created yet!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Use the button below to create user!</h5>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary mb-3" style="width:auto" asp-controller="account" asp-action="register"> Add New User</a>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    <script src="~/js/CustomeScripts.js"></script>
+}
+ 

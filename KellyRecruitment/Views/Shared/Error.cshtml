@@ -1,0 +1,26 @@
+﻿
+@if (ViewBag.ErrorTitle == null)
+{
+    <div class="card">
+        <div class="card-header mt-3">
+            <h2>Error!</h2>
+        </div>
+        <div class="card-body mt-4">
+            <h3 class="text-danger">An error occurred while processing your request.The Supprot team will notified and we are wokring to fix error</h3>
+            <h5 class="text-danger">Please contact us on : infokelly@gmail.com.</h5>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2 class="text-danger">@ViewBag.ErrorTitle</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="text-danger">@ViewBag.ErrorMessage</h5>
+        </div>
+    </div>
+
+
+}

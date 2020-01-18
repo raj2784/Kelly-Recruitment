@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "AccountLocked";
+}
+
+    <div class="text-center">
+        <h1 class="text-danger">Your Account is Locked</h1>
+        <img src="~/Images/LockedAccount.jpg" style="width:300px; height:300px" />
+        <p>
+            Please try login after some time! or you may reset your password by clicking
+            <a asp-action="ForgotPassword" asp-controller="Account">here</a>
+        </p>
+    </div>

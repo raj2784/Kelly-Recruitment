@@ -1,0 +1,63 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "List of Roles";
+}
+
+<h3 class="mt-3">List of Roles</h3>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="createrole" asp-controller="administration">
+        Add New Role
+    </a>
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">@role.Name</h3>
+            </div>
+            <div class="card-footer">
+                <form asp-action="DeleteRole" asp-route-Id="@role.Id" asp-controller="Administration" method="post">
+                    <a asp-controller="Administration" asp-action="EditRole" asp-route-Id="@role.Id" class="btn btn-primary">Edit</a>
+
+                    <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                        <span>Are you sure you want to Delete?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@role.Id',false)">No</a>
+                    </span>
+
+                    <span id="deleteSpan_@role.Id">
+                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@role.Id',true)">Delete</a>
+                    </span>
+
+                    @*for browser Delete confrimation*@
+                    @*<button type="submit" class="btn btn-danger"
+                          onclick="return confirm('Are you sure you want to Delete role : @role.Name??')">Delete</button>*@
+                </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header text-danger">
+            No Roles Created Yet!
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">
+                Use the button below to creat new role.
+            </h3>
+        </div>
+        <div class="card-footer">
+            <a asp-action="createrole" asp-controller="administration" class="btn btn-primary" style="width:auto">Create Role</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/js/CustomeScripts.js"></script>
+}
