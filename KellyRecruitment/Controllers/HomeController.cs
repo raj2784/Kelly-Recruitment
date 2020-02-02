@@ -18,15 +18,18 @@ namespace KellyRecruitment.Controllers
 	{
 		private readonly IEmployeeRepository empRepository;
 		private readonly IHostingEnvironment hostingEnvironment;
+		private readonly AppDbContext db;
 		private readonly ILogger<HomeController> logger;
 
 		public HomeController(IEmployeeRepository employeeRepository,
 							  IHostingEnvironment hostingEnvironment,
+							  AppDbContext context,
 							  ILogger<HomeController> logger)
-							  
+
 		{
 			empRepository = employeeRepository;
 			this.hostingEnvironment = hostingEnvironment;
+			db = context;
 			this.logger = logger;
 		}
 		private string ProcessUploadedFile(CreateEmployeViewModel model)
@@ -77,6 +80,14 @@ namespace KellyRecruitment.Controllers
 
 		[AllowAnonymous]
 		public IActionResult Index()
+		{
+
+			var model = empRepository.GetAllEmployee();
+			return View(model);
+
+		}
+		[AllowAnonymous]
+		public IActionResult ListView()
 		{
 
 			var model = empRepository.GetAllEmployee();
@@ -170,6 +181,33 @@ namespace KellyRecruitment.Controllers
 		{
 			return View();
 		}
+		[HttpGet]
+		[AllowAnonymous]
+		public IActionResult ContactUs()
+		{
+			return View();
+		}
+		[HttpPost]
+		[AllowAnonymous]
+		public IActionResult ContactUs(ContactUs model)
+		{
+			if (ModelState.IsValid)
+			{
+				ContactUs contactUs = new ContactUs
+				{
+					Name = model.Name,
+					Email = model.Email,
+					Mobile = model.Mobile,
+					Message = model.Message
+				};
+				db.ContactUstbl.Add(contactUs);
+				db.SaveChanges();
+				return View("InquiryConfirmationView");
+
+			}
+			return View();
+		}
+
 
 		//[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		//public IActionResult Error()

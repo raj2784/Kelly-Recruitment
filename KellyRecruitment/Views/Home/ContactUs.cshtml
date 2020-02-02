@@ -1,0 +1,49 @@
+﻿@model CreateContactUsViewModel
+@{
+    ViewData["Title"] = "ContctUs";
+}
+
+<div class="text-center mt-3">
+    <img src="~/Images/ContactUs.jpg" style="height:200px" />
+    <p class="mt-3 text-info">
+        if you have any question or inquiry please fill the below information and some one form our team will getback to you shortly!
+
+    </p>
+</div>
+
+<form asp-controller="home" asp-action="contactus" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label font-weight-bold"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label font-weight-bold"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Mobile" class="col-sm-2 col-form-label font-weight-bold"></label>
+        <div class="col-sm-10">
+            <input asp-for="Mobile" class="form-control" placeholder="Mobile" />
+            <span asp-validation-for="Mobile" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Message" class="col-sm-2 col-form-label font-weight-bold"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Message" class="form-control" placeholder="Message"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

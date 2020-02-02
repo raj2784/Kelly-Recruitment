@@ -37,7 +37,14 @@ namespace KellyRecruitment
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
+			// For MSSQL Databse
 			services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+
+			//For Oracle Database
+			//services.AddDbContextPool<AppDbContext>(options => options.UseOracle(Configuration.GetConnectionString("DbConnection")));
+
+			//For MySQl Database
+			//services.AddDbContextPool<AppDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("DbConnection")));
 
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
@@ -64,7 +71,7 @@ namespace KellyRecruitment
 
 
 			}).AddEntityFrameworkStores<AppDbContext>()
-			  .AddDefaultTokenProviders()
+			.AddDefaultTokenProviders()
 			//cuctome Email Confirmation token provider
 			.AddTokenProvider<CustomEmailConfirmationTokenProvider<ApplicationUser>>("CustomEmailConfirmation");
 

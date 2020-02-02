@@ -17,7 +17,7 @@ namespace KellyRecruitment.ModelsView
 		public string Name { get; set; }
 		[DateRange("01/01/2000",ErrorMessage = "Dob should be after 01/01/2000 to till date only")]
 		[DataType(DataType.DateTime)]
-		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+		//[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
 		public DateTime Dob { get; set; }
 
 		[Required]

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "List-View";
+}
+
+
+<h3 class="mt-3">List of Employee</h3>
+
+@section Style
+{
+    <link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section Scripts
+
+{
+    <script src="~/js/jquery.dataTable.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script>
+
+        $(document).ready(function () {
+            $('#tbl').DataTable();
+
+        });
+
+    </script>
+
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table border="1" id="tbl" class="display compact text-center" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    <button>@Html.ActionLink("Edit", "Edit", "Home", new { Id = item.Id }, new { @class = "btn btn-success btn-sm" })</button>
+                    <button>@Html.ActionLink("Detalis", "Details", "Home", new { Id = item.Id }, new { @class = "btn btn-primary btn-sm" })</button>
+                    <button> @Html.ActionLink("Delete", "Delete", "Home", new { Id = item.Id }, new{ @class = "btn btn-danger btn-sm",
+                                                        onclick = "return confirm('Are you sure you wish to delete this record?')" }) </button>
+
+
+                    @*<a asp-action="Edit" asp-route-id="@item.Id"class = "btn btn-success btn-sm">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id"class = "btn btn-primary btn-sm">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('are you sure you want to delete this record??')">Delete</a>*@
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

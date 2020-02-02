@@ -16,6 +16,8 @@ namespace KellyRecruitment.Models
 		}
 		public DbSet<Employee> Employees { get; set; }
 
+		public DbSet<ContactUs> ContactUstbl { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelbuilder)
 		{
 			base.OnModelCreating(modelbuilder);

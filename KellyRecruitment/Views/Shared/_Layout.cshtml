@@ -58,30 +58,29 @@
                     <li class="nav-item">
                         <a asp-action="home" asp-controller="home" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a asp-action="index" asp-controller="home" class="nav-link">List</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Employee</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                            <a class="dropdown-item" asp-controller="Home" asp-action="create">Create</a>
+
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Listview">List View</a>
+
+                            <a class="dropdown-item" asp-controller="Home" asp-action="Gridview">Grid View</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a asp-action="create" asp-controller="home" class="nav-link">Create</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Account" asp-action="ChangePassword">Password</a>
-                    </li>
+
                     @if (signInManager.IsSignedIn(User) && User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Administration" asp-action="ListUsers">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Administration" asp-action="ListRoles">Roles</a>
-                        </li>
-
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false"> Manage</a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                                 <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users</a>
 
                                 <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles</a>
@@ -91,6 +90,9 @@
                         </li>
 
                     }
+                    <li class="nav-item">
+                        <a asp-action="contactus" asp-controller="home" class="nav-link">Contact Us</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     @if (signInManager.IsSignedIn(User))
